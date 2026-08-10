@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 export default function Footer({ onOpenPrivacy, onOpenTerms }) {
   const [showScrollBtn, setShowScrollBtn] = useState(false);

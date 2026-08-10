@@ -1,4 +1,4 @@
-import heroWorker from '../assets/hero_worker.jpg';
+import heroWorker from '../assets/hero_worker.webp';
 
 export default function Hero() {
   const handleScrollTo = (e, targetId) => {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import galleryRemoval from '../assets/gallery_removal.jpg';
-import galleryPreservation from '../assets/gallery_preservation.jpg';
-import galleryStump from '../assets/gallery_stump.jpg';
+import galleryRemoval from '../assets/gallery_removal.webp';
+import galleryPreservation from '../assets/gallery_preservation.webp';
+import galleryStump from '../assets/gallery_stump.webp';
 
 const TESTIMONIALS = [
   {

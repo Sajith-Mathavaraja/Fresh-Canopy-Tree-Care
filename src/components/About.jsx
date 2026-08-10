@@ -1,4 +1,4 @@
-import aboutArborist from '../assets/about_arborist.jpg';
+import aboutArborist from '../assets/about_arborist.webp';
 
 export default function About() {
   return (

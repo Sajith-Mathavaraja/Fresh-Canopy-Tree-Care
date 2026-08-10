@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 // Import service-specific arborist images
-import imgPruning from '../assets/service_pruning.jpg';
-import imgRemoval from '../assets/service_removal.jpg';
-import imgConsulting from '../assets/service_consulting.jpg';
-import imgEmergency from '../assets/service_emergency.jpg';
-import imgGrinding from '../assets/service_grinding.jpg';
+import imgPruning from '../assets/service_pruning.webp';
+import imgRemoval from '../assets/service_removal.webp';
+import imgConsulting from '../assets/service_consulting.webp';
+import imgEmergency from '../assets/service_emergency.webp';
+import imgGrinding from '../assets/service_grinding.webp';
 
 export default function Services({ onSelectService }) {
   const [activeTab, setActiveTab] = useState('pruning');
