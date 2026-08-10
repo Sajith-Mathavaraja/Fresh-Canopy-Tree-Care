@@ -33,7 +33,7 @@ export default function Footer({ onOpenPrivacy, onOpenTerms }) {
         <div className="footer-brand-col">
           <div className="footer-logo-row" id="footer-brand-title">
             <a href="#home" className="logo-container" onClick={e => handleScrollTo(e, '#home')} aria-label="FreshCanopy – back to top" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-              <img src={logo} alt="FreshCanopy Tree Care Logo" className="footer-logo-img" />
+              <img src={logo} alt="FreshCanopy Tree Care Logo" className="footer-logo-img" width="180" height="44" />
               <span className="logo-text">
                 Fresh<span className="logo-text-accent">Canopy</span>
               </span>
