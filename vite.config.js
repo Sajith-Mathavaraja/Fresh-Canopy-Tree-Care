@@ -48,14 +48,7 @@ export default defineConfig({
   plugins: [react(), inlineCssPlugin()],
   base: process.env.GITHUB_ACTIONS ? '/Fresh-Canopy-Tree-Care/' : '/',
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-        }
-      }
-    }
+    target: 'esnext',
+    cssMinify: true,
   }
 })
