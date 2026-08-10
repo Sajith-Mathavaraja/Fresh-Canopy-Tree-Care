@@ -23,6 +23,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          var swPath = window.location.pathname.startsWith('/Fresh-Canopy-Tree-Care') 
+            ? '/Fresh-Canopy-Tree-Care/sw.js' 
+            : '/sw.js';
+          navigator.serviceWorker.register(swPath).catch(function() {});
+        });
+      }
+    </script>
   </body>
 </html>
 
