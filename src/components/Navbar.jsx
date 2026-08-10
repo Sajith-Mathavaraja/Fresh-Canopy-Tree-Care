@@ -15,7 +15,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleResize = () => { if (window.innerWidth > 768) setIsOpen(false); };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
