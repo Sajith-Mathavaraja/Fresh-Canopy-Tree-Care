@@ -4,14 +4,14 @@ import Hero from './components/Hero';
 import SEO from './components/SEO';
 import Reveal from './components/Reveal';
 import { FAQ_DATA } from './data/faqData';
-import PolicyModals from './components/PolicyModals';
 
-// Lazy load below-the-fold sections for maximum initial load performance (code splitting)
+// Lazy load below-the-fold sections and heavy modal overlays for maximum initial load performance (code splitting)
 const Services = lazy(() => import('./components/Services'));
 const About = lazy(() => import('./components/About'));
 const Gallery = lazy(() => import('./components/Gallery'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
+const PolicyModals = lazy(() => import('./components/PolicyModals'));
 
 // A clean, height-matched skeleton loader to prevent Layout Shifts (CLS) during lazy loading
 const SectionSkeleton = ({ height = '400px' }) => (
@@ -108,11 +108,13 @@ export default function App() {
       </Suspense>
 
       {/* Policy Documents Modal Overlay */}
-      <PolicyModals 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-        type={modalType} 
-      />
+      <Suspense fallback={null}>
+        <PolicyModals 
+          isOpen={isModalOpen} 
+          onClose={handleCloseModal} 
+          type={modalType} 
+        />
+      </Suspense>
     </>
   );
 }
