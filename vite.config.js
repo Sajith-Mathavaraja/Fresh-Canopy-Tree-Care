@@ -48,7 +48,6 @@ export default defineConfig({
   plugins: [react(), inlineCssPlugin()],
   base: process.env.GITHUB_ACTIONS ? '/Fresh-Canopy-Tree-Care/' : '/',
   build: {
-    target: 'esnext',
-    cssMinify: true,
+    target: 'esnext'
   }
 })
