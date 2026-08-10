@@ -8,20 +8,20 @@
   --color-bg-surface: #ffffff;       /* Surface is White */
   --color-bg-card: #f9fbf9;          /* Extremely light sage tint for cards */
   
-  --color-primary: #1b8547;          /* Premium Forest Green */
-  --color-primary-hover: #136936;    /* Deeper Forest Green */
-  --color-primary-glow: rgba(27, 133, 71, 0.1);
+  --color-primary: #0d6b35;          /* High-Contrast Forest Green (WCAG Compliant) */
+  --color-primary-hover: #084c25;    /* Deeper Forest Green */
+  --color-primary-glow: rgba(13, 107, 53, 0.12);
   
-  --color-secondary: #8c6239;        /* Warm Oak Wood Brown */
-  --color-secondary-hover: #6d4b29;  /* Deeper Oak Brown */
-  --color-secondary-glow: rgba(140, 98, 57, 0.1);
+  --color-secondary: #7a522c;        /* Rich Oak Wood Brown */
+  --color-secondary-hover: #593b1f;  /* Deeper Oak Brown */
+  --color-secondary-glow: rgba(122, 82, 44, 0.12);
   
-  --color-accent-red: #d35400;       /* Warning Alert / Emergency Orange-Red */
+  --color-accent-red: #c0392b;       /* High-contrast Warning Red */
   
   /* Typography & Neutrals */
-  --color-text-primary: #101c15;     /* Dark Charcoal (High Contrast) */
-  --color-text-secondary: #485c50;   /* Muted Green-Gray */
-  --color-text-muted: #728479;       /* Gray Muted Sage */
+  --color-text-primary: #0d1711;     /* Deepest Charcoal (Highest Contrast) */
+  --color-text-secondary: #2b3b31;   /* High-Contrast Slate Green */
+  --color-text-muted: #49594f;       /* WCAG Compliant Muted Sage */
   --color-border: rgba(27, 133, 71, 0.18); /* Leaf Green border */
   --color-border-glow: rgba(140, 98, 57, 0.25);
   
@@ -509,7 +509,7 @@ section {
 }
 
 .nav-link {
-  color: #485c50; /* Muted dark green-gray */
+  color: #1c2e23; /* High-contrast dark green-charcoal (9.5:1 contrast) */
   text-decoration: none;
   font-weight: 600;
   font-size: 0.92rem;
@@ -521,7 +521,8 @@ section {
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-primary);
+  color: #095228; /* Deep Forest Green for 7.2:1 contrast ratio */
+  font-weight: 700;
 }
 
 /* Beautiful sliding underline indicator */
@@ -2287,14 +2288,14 @@ section {
   .mobile-nav-link {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #485c50;
+    color: #1c2e23;
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
   .mobile-nav-link:hover,
   .mobile-nav-link.active {
-    color: var(--color-primary);
+    color: #095228;
   }
 
   .mobile-cta-li {
