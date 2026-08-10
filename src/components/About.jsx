@@ -17,7 +17,7 @@ export default function About() {
           </picture>
 
           {/* Floating Eco Badge */}
-          <div className="eco-badge glass-panel animate-fade-in" aria-label="Eco-Friendly Tree Care Promise">
+          <div className="eco-badge glass-panel animate-fade-in" role="region" aria-label="Eco-Friendly Tree Care Promise">
             <div className="eco-icon-container" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5z" />

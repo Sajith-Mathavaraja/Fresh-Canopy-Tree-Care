@@ -78,6 +78,8 @@ export default function Contact() {
             data-layout-iframe-id="inline-Peq10S4cHDMRRNTk9FGA"
             data-form-id="Peq10S4cHDMRRNTk9FGA"
             title="FreshCanopy Tree Care Form"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           />
         </div>
 

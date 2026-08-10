@@ -92,14 +92,14 @@ export default function Gallery() {
           tabIndex="0"
           aria-label="Customer testimonials slide deck. Use left and right arrow keys to navigate."
         >
-          <div className="slider-nav-btn prev-btn" onClick={handlePrev} aria-label="Previous testimonial" role="button">
+          <button type="button" className="slider-nav-btn prev-btn" onClick={handlePrev} aria-label="Previous testimonial">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="slider-arrow">
               <polyline points="15 18 9 12 15 6" />
             </svg>
-          </div>
+          </button>
 
           <div className="testimonial-content-area" aria-live="polite">
-            <div className="rating-stars" aria-label={`Rated ${TESTIMONIALS[activeIndex].rating} out of 5 stars`}>
+            <div className="rating-stars" role="img" aria-label={`Rated ${TESTIMONIALS[activeIndex].rating} out of 5 stars`}>
               {[...Array(TESTIMONIALS[activeIndex].rating)].map((_, i) => (
                 <svg key={i} className="star-icon" viewBox="0 0 24 24" fill="var(--color-secondary)" stroke="var(--color-secondary)">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -119,11 +119,11 @@ export default function Gallery() {
             </div>
           </div>
 
-          <div className="slider-nav-btn next-btn" onClick={handleNext} aria-label="Next testimonial" role="button">
+          <button type="button" className="slider-nav-btn next-btn" onClick={handleNext} aria-label="Next testimonial">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="slider-arrow">
               <polyline points="9 18 15 12 9 6" />
             </svg>
-          </div>
+          </button>
 
           {/* Dots Indicator */}
           <div className="slider-dots">
