@@ -1,21 +1,51 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function Contact() {
-  // Dynamically load the form embed script on component mount
+  const [shouldLoadForm, setShouldLoadForm] = useState(false);
+  const contactRef = useRef(null);
+
   useEffect(() => {
+    // Trigger immediately if target hash is #contact
+    if (window.location.hash === '#contact') {
+      setShouldLoadForm(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoadForm(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px' } // Pre-load 300px before scrolling into view
+    );
+
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Dynamically load the form embed script ONLY when section is approached
+  useEffect(() => {
+    if (!shouldLoadForm) return;
+
     const script = document.createElement('script');
     script.src = "https://link.kdlead.com/js/form_embed.js";
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script on unmount
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
-  }, []);
+  }, [shouldLoadForm]);
 
   return (
-    <section id="contact" className="contact-section" aria-labelledby="contact-title">
+    <section id="contact" ref={contactRef} className="contact-section" aria-labelledby="contact-title">
       <div className="container contact-grid">
         
         {/* Left Column: Direct Contact Details & Urgency Info */}
@@ -42,8 +72,6 @@ export default function Contact() {
               </div>
             </div>
 
-
-
             <div className="contact-card-item glass-panel">
               <div className="contact-card-icon-wrapper" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -62,25 +90,31 @@ export default function Contact() {
 
         {/* Right Column: Lead Form Iframe Panel */}
         <div className="contact-form-panel reveal active" style={{ padding: '0' }}>
-          <iframe
-            src="https://link.kdlead.com/widget/form/Peq10S4cHDMRRNTk9FGA"
-            style={{ width: '100%', height: '830px', border: 'none', borderRadius: '8px' }}
-            id="inline-Peq10S4cHDMRRNTk9FGA" 
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="FreshCanopy Tree Care Form"
-            data-height="830"
-            data-layout-iframe-id="inline-Peq10S4cHDMRRNTk9FGA"
-            data-form-id="Peq10S4cHDMRRNTk9FGA"
-            title="FreshCanopy Tree Care Form"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {shouldLoadForm ? (
+            <iframe
+              src="https://link.kdlead.com/widget/form/Peq10S4cHDMRRNTk9FGA"
+              style={{ width: '100%', height: '830px', border: 'none', borderRadius: '8px' }}
+              id="inline-Peq10S4cHDMRRNTk9FGA" 
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="FreshCanopy Tree Care Form"
+              data-height="830"
+              data-layout-iframe-id="inline-Peq10S4cHDMRRNTk9FGA"
+              data-form-id="Peq10S4cHDMRRNTk9FGA"
+              title="FreshCanopy Tree Care Form"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          ) : (
+            <div style={{ height: '830px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f9fbf9', border: '1px solid rgba(27, 133, 71, 0.12)', borderRadius: '8px' }}>
+              <span style={{ color: 'var(--color-primary)', fontWeight: '600', fontSize: '0.95rem' }}>Loading Form...</span>
+            </div>
+          )}
         </div>
 
       </div>
