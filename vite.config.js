@@ -47,18 +47,14 @@ function inlineCssPlugin() {
 export default defineConfig({
   plugins: [react(), inlineCssPlugin()],
   base: process.env.GITHUB_ACTIONS ? '/Fresh-Canopy-Tree-Care/' : '/',
-  build: {
-    target: 'esnext',
-    rollupOptions: {
-      output: {
-        // Split React runtime into its own long-cached chunk so app code
-        // changes don't invalidate the React cache entry
-        manualChunks: (id) => {
-          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/') || id.includes('node_modules/scheduler/')) {
-            return 'react-vendor';
-          }
-        }
-      }
+  resolve: {
+    alias: {
+      'react': 'preact/compat',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/jsx-runtime'
     }
+  },
+  build: {
+    target: 'esnext'
   }
 })
