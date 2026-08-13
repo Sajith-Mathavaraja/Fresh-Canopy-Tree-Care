@@ -61,7 +61,7 @@ export default function Navbar() {
 
         {/* ── Logo ── */}
         <a href="#home" className="logo-container" onClick={e => go(e, '#home')} aria-label="FreshCanopy – back to top">
-          <img src={logo} alt="FreshCanopy Tree Care Logo" className="logo-img" width="160" height="38" />
+          <img src={logo} alt="FreshCanopy Tree Care Logo" className="logo-img" width="160" height="160" />
           <span className="logo-text">
             Fresh<span className="logo-text-accent">Canopy</span>
           </span>
