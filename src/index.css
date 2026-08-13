@@ -680,6 +680,11 @@ section {
   box-sizing: border-box;
 }
 
+/* Offset all anchor sections below the sticky navbar when scrollIntoView() is used */
+#home, #services, #about, #gallery, #contact {
+  scroll-margin-top: 80px;
+}
+
 .hero-content-wrapper {
   position: relative;
   z-index: 2;

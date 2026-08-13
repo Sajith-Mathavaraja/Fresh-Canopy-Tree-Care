@@ -19,29 +19,52 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Track active section using IntersectionObserver to eliminate forced reflows (layout thrashing)
+  // Track active section — uses IntersectionObserver on sections as they are
+  // lazily mounted into the DOM (MutationObserver watches for late arrivals)
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: '-20% 0px -50% 0px', // Center viewport activation zone
-        threshold: 0,
-      }
-    );
-
     const sectionIds = navLinks.map(link => link.href.slice(1));
-    sectionIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    const observed = new Set();
 
-    return () => observer.disconnect();
+    const ioOptions = {
+      rootMargin: '-10% 0px -60% 0px', // Activate when section top crosses upper 40% of viewport
+      threshold: 0,
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      // Pick the intersecting entry with the highest intersection ratio
+      let best = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!best || entry.intersectionRatio > best.intersectionRatio) {
+            best = entry;
+          }
+        }
+      });
+      if (best) setActiveSection(best.target.id);
+    }, ioOptions);
+
+    const observeIfNew = (id) => {
+      if (observed.has(id)) return;
+      const el = document.getElementById(id);
+      if (el) {
+        io.observe(el);
+        observed.add(id);
+      }
+    };
+
+    // Observe any sections already in the DOM
+    sectionIds.forEach(observeIfNew);
+
+    // Watch for lazy-loaded sections being added later
+    const mo = new MutationObserver(() => {
+      sectionIds.forEach(observeIfNew);
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   const go = (e, href) => {
