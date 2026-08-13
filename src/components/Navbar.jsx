@@ -14,9 +14,12 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleResize = () => { if (window.innerWidth > 768) setIsOpen(false); };
-    window.addEventListener('resize', handleResize, { passive: true });
-    return () => window.removeEventListener('resize', handleResize);
+    const mql = window.matchMedia('(min-width: 769px)');
+    const handleMediaChange = (e) => {
+      if (e.matches) setIsOpen(false);
+    };
+    mql.addEventListener('change', handleMediaChange);
+    return () => mql.removeEventListener('change', handleMediaChange);
   }, []);
 
   // Dynamically import observer logic to keep it out of the initial parse bundle.
