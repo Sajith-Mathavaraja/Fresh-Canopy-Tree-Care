@@ -1,11 +1,10 @@
 import { useState, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Reveal from './components/Reveal';
-import { FAQ_DATA } from './data/faqData';
 
 // Lazy load below-the-fold sections and heavy modal overlays for maximum initial load performance (code splitting)
 const SEO = lazy(() => import('./components/SEO'));
+const Reveal = lazy(() => import('./components/Reveal'));
 const Services = lazy(() => import('./components/Services'));
 const About = lazy(() => import('./components/About'));
 const Gallery = lazy(() => import('./components/Gallery'));
@@ -61,7 +60,6 @@ export default function App() {
           title="Expert Certified Arborist Services in Buffalo & Clarence, NY" 
           description="FreshCanopy Tree Care provides certified arborist services, professional trimming, safe removals, stump grinding, and 24/7 storm damage emergency response in Buffalo, Clarence, and Erie County, NY."
           path="/"
-          faqData={FAQ_DATA}
         />
       </Suspense>
 

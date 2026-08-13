@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
+import { FAQ_DATA } from '../data/faqData';
 
-export default function SEO({ title, description, path, type = 'website', faqData = [] }) {
+export default function SEO({ title, description, path, type = 'website' }) {
   useEffect(() => {
     const applySeo = () => {
       // 1. Title Tag
@@ -168,11 +169,11 @@ export default function SEO({ title, description, path, type = 'website', faqDat
       });
 
       // FAQ Schema
-      if (faqData && faqData.length > 0) {
+      if (FAQ_DATA && FAQ_DATA.length > 0) {
         schemaData.push({
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          'mainEntity': faqData.map(item => ({
+          'mainEntity': FAQ_DATA.map(item => ({
             '@type': 'Question',
             'name': item.question,
             'acceptedAnswer': {
@@ -212,7 +213,7 @@ export default function SEO({ title, description, path, type = 'website', faqDat
       const scripts = document.querySelectorAll('script[data-schema="seo-jsonld"]');
       scripts.forEach(el => el.remove());
     };
-  }, [title, description, path, type, faqData]);
+  }, [title, description, path, type]);
 
   return null;
 }
