@@ -2392,6 +2392,7 @@ section {
   }
 
   .slider-dots {
+    grid-column: 1;
     margin-top: 12px;
   }
 
