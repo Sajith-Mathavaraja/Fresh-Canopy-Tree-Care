@@ -66,8 +66,8 @@ export default function Hero() {
                 className="hero-cutout-image"
                 fetchPriority="high"
                 decoding="sync"
-                width="500"
-                height="500"
+                width="600"
+                height="600"
               />
             </div>
           </div>
