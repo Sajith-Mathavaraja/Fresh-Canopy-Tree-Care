@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
+import { FAQ_DATA } from '../data/faqData';
 
-export default function SEO({ title, description, path, type = 'website', faqData = [] }) {
+export default function SEO({ title, description, path, type = 'website', faqData = FAQ_DATA }) {
   useEffect(() => {
     // 1. Title Tag
     const defaultTitle = 'FreshCanopy Tree Care | Professional Certified Arborists';
