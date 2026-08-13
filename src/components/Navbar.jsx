@@ -19,60 +19,25 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Track active section — uses IntersectionObserver on sections as they are
-  // lazily mounted into the DOM (MutationObserver watches for late arrivals)
+  // Dynamically import observer logic to keep it out of the initial parse bundle.
+  // Runs after mount via requestIdleCallback so it never blocks first paint.
   useEffect(() => {
     const sectionIds = navLinks.map(link => link.href.slice(1));
-    const observed = new Set();
+    let cleanup;
 
-    const ioOptions = {
-      rootMargin: '-10% 0px -60% 0px', // Activate when section top crosses upper 40% of viewport
-      threshold: 0,
-    };
-
-    const io = new IntersectionObserver((entries) => {
-      // Pick the intersecting entry with the highest intersection ratio
-      let best = null;
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (!best || entry.intersectionRatio > best.intersectionRatio) {
-            best = entry;
-          }
-        }
+    const init = () => {
+      import('../utils/sectionObserver').then(({ setupSectionObserver }) => {
+        cleanup = setupSectionObserver(sectionIds, setActiveSection);
       });
-      if (best) setActiveSection(best.target.id);
-    }, ioOptions);
-
-    const observeIfNew = (id) => {
-      if (observed.has(id)) return;
-      const el = document.getElementById(id);
-      if (el) {
-        io.observe(el);
-        observed.add(id);
-      }
     };
 
-    // Observe any sections already in the DOM
-    sectionIds.forEach(observeIfNew);
-
-    // Watch for lazy-loaded sections — disconnect as soon as all are found
-    const mo = new MutationObserver(() => {
-      sectionIds.forEach(observeIfNew);
-      // Stop watching once every section is attached
-      if (observed.size === sectionIds.length) {
-        mo.disconnect();
-      }
-    });
-
-    // Only start MutationObserver if sections are still missing
-    if (observed.size < sectionIds.length) {
-      mo.observe(document.body, { childList: true, subtree: true });
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(init, { timeout: 1000 });
+    } else {
+      setTimeout(init, 100);
     }
 
-    return () => {
-      io.disconnect();
-      mo.disconnect();
-    };
+    return () => cleanup?.();
   }, []);
 
   const go = (e, href) => {
