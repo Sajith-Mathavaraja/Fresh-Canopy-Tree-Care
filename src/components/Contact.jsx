@@ -18,7 +18,7 @@ export default function Contact() {
           observer.disconnect();
         }
       },
-      { rootMargin: '300px' } // Pre-load 300px before scrolling into view
+      { rootMargin: '100px' } // Pre-load 100px before entering viewport
     );
 
     if (contactRef.current) {

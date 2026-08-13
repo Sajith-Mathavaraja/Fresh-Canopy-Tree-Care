@@ -5,11 +5,7 @@ export default function Hero() {
     e.preventDefault();
     const target = document.querySelector(targetId);
     if (target) {
-      const offsetPosition = target.getBoundingClientRect().top + window.scrollY - 90;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      target.scrollIntoView({ behavior: 'smooth' });
       window.history.pushState(null, '', targetId);
     }
   };

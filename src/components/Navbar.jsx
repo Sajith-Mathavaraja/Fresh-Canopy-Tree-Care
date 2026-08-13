@@ -50,15 +50,7 @@ export default function Navbar() {
     
     const target = document.querySelector(href);
     if (target) {
-      const navbarOffset = 90; // Height of floating nav (64px) + margin-top (20px) + margin buffer
-      const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navbarOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      
+      target.scrollIntoView({ behavior: 'smooth' });
       window.history.pushState(null, '', href);
     }
   };
