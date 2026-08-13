@@ -55,11 +55,19 @@ export default function Navbar() {
     // Observe any sections already in the DOM
     sectionIds.forEach(observeIfNew);
 
-    // Watch for lazy-loaded sections being added later
+    // Watch for lazy-loaded sections — disconnect as soon as all are found
     const mo = new MutationObserver(() => {
       sectionIds.forEach(observeIfNew);
+      // Stop watching once every section is attached
+      if (observed.size === sectionIds.length) {
+        mo.disconnect();
+      }
     });
-    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Only start MutationObserver if sections are still missing
+    if (observed.size < sectionIds.length) {
+      mo.observe(document.body, { childList: true, subtree: true });
+    }
 
     return () => {
       io.disconnect();
