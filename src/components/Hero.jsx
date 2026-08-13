@@ -65,6 +65,9 @@ export default function Hero() {
                 alt="Certified arborist working safely high in a tree with a tree care truck below"
                 className="hero-cutout-image"
                 fetchPriority="high"
+                decoding="sync"
+                width="500"
+                height="500"
               />
             </div>
           </div>

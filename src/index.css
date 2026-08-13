@@ -363,10 +363,12 @@ section {
 
 /* ── Glow Pulse for Emergency elements ── */
 .emergency-call {
+  will-change: box-shadow, opacity;
   animation: pulseGlow 2s infinite alternate ease-in-out;
 }
 
 .phone-emergency {
+  will-change: opacity;
   animation: textPulse 2s infinite alternate ease-in-out;
 }
 
@@ -378,18 +380,17 @@ section {
   100% {
     box-shadow: 0 0 18px rgba(211, 84, 0, 0.55);
     border-color: var(--color-accent-red);
-    transform: scale(1.05);
   }
 }
 
 @keyframes textPulse {
   0% {
     color: var(--color-accent-red);
-    transform: scale(1);
+    opacity: 1;
   }
   100% {
     color: #e67e22;
-    transform: scale(1.02);
+    opacity: 0.85;
   }
 }
 
@@ -2571,6 +2572,7 @@ section {
   filter: blur(120px);
   opacity: 0.28; /* Soft, premium glowing backdrop */
   will-change: transform;
+  contain: layout style;
 }
 
 .hero-blob-green {
